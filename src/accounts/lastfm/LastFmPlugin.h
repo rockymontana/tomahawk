@@ -24,7 +24,7 @@
 #include "infosystem/InfoSystemWorker.h"
 
 #include <lastfm/Track>
-#include <lastfm/Audioscrobbler>
+#include <lastfm/AudioScrobbler>
 #include <lastfm/ScrobblePoint>
 
 #include <QObject>

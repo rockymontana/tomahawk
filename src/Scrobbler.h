@@ -51,7 +51,7 @@ private:
     void scrobble();
 
     bool m_reachedScrobblePoint;
-    ScrobblePoint m_scrobblePoint;
+    lastfm::ScrobblePoint m_scrobblePoint;
 };
 
 

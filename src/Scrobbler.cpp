@@ -34,7 +34,6 @@
 
 static QString s_scInfoIdentifier = QString( "SCROBBLER" );
 
-
 Scrobbler::Scrobbler( QObject* parent )
     : QObject( parent )
     , m_reachedScrobblePoint( false )
@@ -95,9 +94,9 @@ Scrobbler::trackStarted( const Tomahawk::result_ptr& track )
 
     // liblastfm forces 0-length tracks to scrobble after 4 minutes, stupid.
     if ( track->duration() == 0 )
-        m_scrobblePoint = ScrobblePoint( 30 );
+        m_scrobblePoint = lastfm::ScrobblePoint( 30 );
     else
-        m_scrobblePoint = ScrobblePoint( track->duration() / 2 );
+        m_scrobblePoint = lastfm::ScrobblePoint( track->duration() / 2 );
 }
 
 

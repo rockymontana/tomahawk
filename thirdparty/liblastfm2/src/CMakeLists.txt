@@ -10,77 +10,85 @@ macro(copy_header from to)
 endmacro(copy_header)
 
 # Copy headers
-copy_header(core/misc.h misc.h)
-copy_header(core/XmlQuery.h XmlQuery)
-copy_header(core/UrlBuilder.h UrlBuilder)
+copy_header(AbstractType.h AbstractType)
+copy_header(Album.h Album)
+copy_header(Artist.h Artist)
+copy_header(Audioscrobbler.h AudioScrobbler)
+copy_header(Auth.h Auth)
+copy_header(Chart.h Chart)
+copy_header(FingerprintId.h FingerprintId)
 copy_header(global.h global.h)
-copy_header(radio/RadioTuner.h RadioTuner)
-copy_header(radio/RadioStation.h RadioStation)
-copy_header(scrobble/Audioscrobbler.h Audioscrobbler)
-copy_header(scrobble/ScrobbleCache.h ScrobbleCache)
-copy_header(scrobble/ScrobblePoint.h ScrobblePoint)
-copy_header(types/AbstractType.h AbstractType)
-copy_header(types/Album.h Album)
-copy_header(types/Artist.h Artist)
-copy_header(types/FingerprintId.h FingerprintId)
-copy_header(types/Mbid.h Mbid)
-copy_header(types/Playlist.h Playlist)
-copy_header(types/Tag.h Tag)
-copy_header(types/Track.h Track)
-copy_header(types/User.h User)
-copy_header(types/User.h UserList)
-copy_header(types/Xspf.h Xspf)
-copy_header(ws/ws.h ws.h)
-copy_header(ws/InternetConnectionMonitor.h InternetConnectionMonitor)
-copy_header(ws/NetworkAccessManager.h NetworkAccessManager)
+copy_header(InternetConnectionMonitor.h InternetConnectionMonitor)
+copy_header(Library.h Library)
+copy_header(Mbid.h Mbid)
+copy_header(misc.h misc.h)
+copy_header(NetworkAccessManager.h NetworkAccessManager)
+copy_header(NetworkConnectionMonitor.h NetworkConnectionMonitor)
+copy_header(Playlist.h Playlist)
+copy_header(RadioStation.h RadioStation)
+copy_header(RadioTuner.h RadioTuner)
+copy_header(ScrobbleCache.h ScrobbleCache)
+copy_header(ScrobblePoint.h ScrobblePoint)
+copy_header(Tag.h Tag)
+copy_header(Tasteometer.h Tasteometer)
+copy_header(Track.h Track)
+copy_header(UrlBuilder.h UrlBuilder)
+copy_header(User.h User)
+copy_header(ws.h ws.h)
+copy_header(XmlQuery.h XmlQuery)
+copy_header(Xspf.h Xspf)
 
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(SOURCES
-    scrobble/ScrobbleCache.cpp
-    scrobble/Audioscrobbler.cpp
-    types/FingerprintId.cpp
-    types/Artist.cpp
-    types/Tag.cpp
-    types/Track.cpp
-    types/User.cpp
-    types/Xspf.cpp
-    types/Album.cpp
-    types/Playlist.cpp
-    types/Mbid.cpp
-    radio/RadioTuner.cpp
-    radio/RadioStation.cpp
-    core/UrlBuilder.cpp
-    core/misc.cpp
-    core/XmlQuery.cpp
-    ws/NetworkAccessManager.cpp
-    ws/ws.cpp
-    ws/InternetConnectionMonitor.cpp
-    ws/NetworkConnectionMonitor.cpp
+    Album.cpp
+    Artist.cpp
+    Audioscrobbler.cpp
+    Auth.cpp
+    Chart.cpp
+    FingerprintId.cpp
+    InternetConnectionMonitor.cpp
+    Library.cpp
+    Mbid.cpp
+    misc.cpp
+    NetworkAccessManager.cpp
+    NetworkConnectionMonitor.cpp
+    Playlist.cpp
+    RadioStation.cpp
+    RadioTuner.cpp
+    ScrobbleCache.cpp
+    ScrobblePoint.cpp
+    Tag.cpp
+    Tasteometer.cpp
+    Track.cpp
+    UrlBuilder.cpp
+    User.cpp
+    ws.cpp
+    XmlQuery.cpp
+    Xspf.cpp
 )
 
 set(MOC_HEADERS
-  scrobble/Audioscrobbler.h
-  types/Track.h
-  types/Xspf.h
-  radio/RadioTuner.h
-  ws/NetworkConnectionMonitor.h
-  ws/InternetConnectionMonitor.h
-  ws/NetworkAccessManager.h
+    Audioscrobbler.h
+    InternetConnectionMonitor.h
+    NetworkAccessManager.h
+    NetworkConnectionMonitor.h
+    RadioTuner.h
+    Xspf.h
 )
 
 if(UNIX)
   if(APPLE)
-    set(SOURCES ${SOURCES} ws/mac/MNetworkConnectionMonitor_mac.cpp)
-    set(MOC_HEADERS ${MOC_HEADERS} ws/mac/MNetworkConnectionMonitor.h)
+    set(SOURCES ${SOURCES} mac/MNetworkConnectionMonitor_mac.cpp)
+    set(MOC_HEADERS ${MOC_HEADERS} mac/MNetworkConnectionMonitor.h)
   else(APPLE)
-    set(SOURCES ${SOURCES} ws/linux/LNetworkConnectionMonitor_linux.cpp)
-    set(MOC_HEADERS ${MOC_HEADERS} ws/linux/LNetworkConnectionMonitor.h)
+    set(SOURCES ${SOURCES} linux/LNetworkConnectionMonitor_linux.cpp)
+    set(MOC_HEADERS ${MOC_HEADERS} linux/LNetworkConnectionMonitor.h)
   endif(APPLE)
 endif(UNIX)
 if(WIN32)
-  set(SOURCES ${SOURCES} ws/win/WNetworkConnectionMonitor_win.cpp ws/win/Pac.cpp ws/win/NdisEvents.cpp )
-  set(MOC_HEADERS ${MOC_HEADERS} ws/win/WNetworkConnectionMonitor.h)
+  set(SOURCES ${SOURCES} win/WNetworkConnectionMonitor_win.cpp win/Pac.cpp win/NdisEvents.cpp )
+  set(MOC_HEADERS ${MOC_HEADERS} win/WNetworkConnectionMonitor.h)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../winhttp)
 endif(WIN32)
 

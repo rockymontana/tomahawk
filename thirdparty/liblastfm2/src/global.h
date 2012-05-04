@@ -21,30 +21,34 @@
 #ifndef LASTFM_GLOBAL_H
 #define LASTFM_GLOBAL_H
 
-#define LASTFM_VERSION 0x00000400
-#define LASTFM_VERSION_STRING "0.4.0"
-#define LASTFM_MAJOR_VERSION 0
-#define LASTFM_MINOR_VERSION 4
+#define LASTFM_VERSION 0x00010000
+#define LASTFM_VERSION_STRING "1.0.0"
+#define LASTFM_MAJOR_VERSION 1
+#define LASTFM_MINOR_VERSION 0
 #define LASTFM_PATCH_VERSION 0
 
 
 #include <QtGlobal>
 
-#ifndef LASTFM_LIB_STATIC
-#ifdef LASTFM_LIB
-    #define LASTFM_DLLEXPORT Q_DECL_EXPORT
+#ifdef Q_CC_MSVC
+    #ifdef LASTFM_LIB
+        #define LASTFM_DLLEXPORT __declspec(dllexport)
+    #else
+        #define LASTFM_DLLEXPORT __declspec(dllimport)
+    #endif
+	#ifdef LASTFM_FINGERPRINT_LIB
+        #define LASTFM_FINGERPRINT_DLLEXPORT __declspec(dllexport)
+    #else
+        #define LASTFM_FINGERPRINT_DLLEXPORT __declspec(dllimport)
+    #endif
+#elif __GNUC__ >= 4
+    #define LASTFM_DLLEXPORT __attribute__ ((visibility("default")))
+	#define LASTFM_FINGERPRINT_DLLEXPORT __attribute__ ((visibility("default")))
 #else
-    #define LASTFM_DLLEXPORT Q_DECL_IMPORT
-#endif
-#ifdef LASTFM_FINGERPRINT_LIB
-    #define LASTFM_FINGERPRINT_DLLEXPORT Q_DECL_EXPORT
-#else
-    #define LASTFM_FINGERPRINT_DLLEXPORT Q_DECL_IMPORT
-#endif
-#else // LASTFM_LIB_STATIC
     #define LASTFM_DLLEXPORT
-    #define LASTFM_FINGERPRINT_DLLEXPORT
-#endif // LASTFM_LIB_STATIC
+	#define LASTFM_FINGERPRINT_DLLEXPORT
+#endif
+
 
 
 #include <QMetaEnum>
@@ -68,65 +72,12 @@ namespace lastfm
         }
         return QString("Unknown enum value for \"%1\": %2").arg( enum_name ).arg( enum_value );
     }
-
-
-    enum ImageSize
-    {
-        Small,
-        Medium,
-        Large, /** seemingly 174x174 */
-        ExtraLarge,
-        Mega
-    };
-    
-    
-    //convenience
-    class Album;
-    class Artist;
-    class Audioscrobbler;
-    class AuthenticatedUser;
-    class Fingerprint;
-    class FingerprintableSource;
-    class FingerprintId;
-    class Mbid;
-    class MutableTrack;
-    class NetworkAccessManager;
-    class Playlist;
-    class User;
-    class RadioStation;
-    class Tag;
-    class Track;
-    class XmlQuery;
-    class Xspf;
 }
 
 
 #ifdef LASTFM_COLLAPSE_NAMESPACE
-using lastfm::Album;
-using lastfm::Artist;
-using lastfm::Audioscrobbler;
-using lastfm::AuthenticatedUser;
-using lastfm::Fingerprint;
-using lastfm::FingerprintId;
-using lastfm::Mbid;
-using lastfm::MutableTrack;
-using lastfm::Playlist;
-using lastfm::User;
-using lastfm::RadioStation;
-using lastfm::Tag;
-using lastfm::Track;
-using lastfm::XmlQuery;
-using lastfm::Xspf;
+using namespace ::lastfm;
 #endif
 
-
-//convenience
-class QDomDocument;
-class QNetworkAccessManager;
-class QNetworkReply;
-
-
-//convenience for development
-#include <QDebug>
 
 #endif //LASTFM_GLOBAL_H
