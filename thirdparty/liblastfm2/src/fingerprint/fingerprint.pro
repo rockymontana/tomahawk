@@ -2,7 +2,6 @@ TEMPLATE = lib
 TARGET = lastfm_fingerprint
 LIBS += -L$$DESTDIR -llastfm
 QT = core xml network sql
-include( _files.qmake )
 DEFINES += LASTFM_FINGERPRINT_LIB
 
 INSTALLS = target
@@ -23,3 +22,25 @@ mac:CONFIG( app_bundle ) {
     PKGCONFIG += fftw3f
 
 }
+
+SOURCES += \
+	Sha256.cpp \
+	fplib/OptFFT.cpp \
+	fplib/FingerprintExtractor.cpp \
+	fplib/Filter.cpp \
+	Fingerprint.cpp \
+	Collection.cpp
+
+HEADERS += \
+	Sha256.h \
+	fplib/OptFFT.h \
+	fplib/fp_helper_fun.h \
+	fplib/FloatingAverage.h \
+	fplib/FingerprintExtractor.h \
+	fplib/Filter.h \
+	fplib/CircularArray.h \
+	FingerprintableSource.h \
+	Fingerprint.h \
+	Collection.h
+
+!win32:VERSION = 0.4.0
