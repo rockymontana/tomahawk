@@ -1,4 +1,19 @@
-FILE (GLOB TS_FILES ${CMAKE_SOURCE_DIR}/lang/*.ts)
+include(AddTomahawkTranslation)
+add_tomahawk_translation(de en)
+add_tomahawk_translation(en)
+add_tomahawk_translation(fr)
+add_tomahawk_translation(hu)
+tomahawk_write_language_qrc()
+
+
+foreach(lang ${TOMAHAWK_LANGUAGES})
+    list(APPEND TS_FILES "${PROJECT_SOURCE_DIR}/lang/${lang}.ts")
+endforeach()
+
+message(FATAL_ERROR ${TS_FILES})
+# FILE (GLOB TS_FILES ${PROJECT_SOURCE_DIR}/lang/*.ts)
+
+
 QT4_ADD_TRANSLATION(QM_FILES ${TS_FILES})
 
 ## HACK HACK HACK - around rcc limitations to allow out of source-tree building
