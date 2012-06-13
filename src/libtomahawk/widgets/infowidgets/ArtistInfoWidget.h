@@ -41,6 +41,9 @@
 class PlayableModel;
 class PlaylistModel;
 
+class QObject;
+class QEvent;
+
 namespace Ui
 {
     class ArtistInfoWidget;
@@ -88,6 +91,7 @@ signals:
 
 protected:
     void changeEvent( QEvent* e );
+    bool eventFilter( QObject *, QEvent * );
 
 private slots:
     void onArtistImageUpdated();
@@ -102,6 +106,7 @@ private slots:
 
 private:
     Ui::ArtistInfoWidget *ui;
+    QWidget* m_mainWidget;
 
     Tomahawk::artist_ptr m_artist;
 
@@ -114,6 +119,7 @@ private:
     QString m_description;
     QString m_longDescription;
     QPixmap m_pixmap;
+    QPixmap m_bgTile;
 
     friend class MetaPlaylistInterface;
 };

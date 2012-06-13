@@ -60,6 +60,7 @@ namespace TomahawkUtils
 
     DLLEXPORT void prepareStyleOption( QStyleOptionViewItemV4* option, const QModelIndex& index, PlayableItem* item );
 
+    DLLEXPORT QPixmap createTiledBackground( const QString& pixmapPath, int width, int height );
 }
 
 #endif // TOMAHAWKUTILSGUI_H

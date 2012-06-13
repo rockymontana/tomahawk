@@ -22,6 +22,8 @@
 #include "ui_ArtistInfoWidget.h"
 
 #include <QScrollArea>
+#include <QPainter>
+#include <QEvent>
 
 #include "audio/AudioEngine.h"
 #include "playlist/PlayableModel.h"
@@ -46,14 +48,15 @@ ArtistInfoWidget::ArtistInfoWidget( const Tomahawk::artist_ptr& artist, QWidget*
     , ui( new Ui::ArtistInfoWidget )
     , m_artist( artist )
 {
-    QWidget* widget = new QWidget;
-    ui->setupUi( widget );
+    m_mainWidget = new QWidget;
+    ui->setupUi( m_mainWidget );
 
     QPalette pal = palette();
-    pal.setColor( QPalette::Window, QColor( "#323435" ) );
+    pal.setColor( QPalette::WindowText, QColor( "#949494" ) );
 
-    widget->setPalette( pal );
-    widget->setAutoFillBackground( true );
+    m_mainWidget->setPalette( pal );
+    m_mainWidget->setAutoFillBackground( true );
+    m_mainWidget->installEventFilter( this );
 
     m_plInterface = Tomahawk::playlistinterface_ptr( new MetaPlaylistInterface( this ) );
 
@@ -102,8 +105,8 @@ ArtistInfoWidget::ArtistInfoWidget( const Tomahawk::artist_ptr& artist, QWidget*
     ui->biography->setAttribute( Qt::WA_MacShowFocusRect, 0 );
 
     QPalette p = ui->biography->palette();
-    p.setColor( QPalette::Foreground, Qt::white );
-    p.setColor( QPalette::Text, Qt::white );
+    p.setColor( QPalette::Foreground, QColor( "#252525" ) );
+    p.setColor( QPalette::Text, QColor( "#252525" ) );
 
     ui->biography->setPalette( p );
     ui->label->setPalette( p );
@@ -116,7 +119,7 @@ ArtistInfoWidget::ArtistInfoWidget( const Tomahawk::artist_ptr& artist, QWidget*
 
     QScrollArea* area = new QScrollArea();
     area->setWidgetResizable( true );
-    area->setWidget( widget );
+    area->setWidget( m_mainWidget );
 
     area->setStyleSheet( "QScrollArea { background-color: #323435; }" );
     area->setFrameShape( QFrame::NoFrame );
@@ -126,6 +129,8 @@ ArtistInfoWidget::ArtistInfoWidget( const Tomahawk::artist_ptr& artist, QWidget*
     layout->addWidget( area );
     setLayout( layout );
     TomahawkUtils::unmarginLayout( layout );
+
+    m_bgTile = TomahawkUtils::createTiledBackground( RESPATH "images/artistpage-background-tile.png", m_mainWidget->width(), m_mainWidget->height() );
 
     load( artist );
 }
@@ -290,4 +295,25 @@ ArtistInfoWidget::changeEvent( QEvent* e )
         default:
             break;
     }
+}
+
+
+bool
+ArtistInfoWidget::eventFilter( QObject* obj, QEvent* event )
+{
+    if ( obj == m_mainWidget && event->type() == QEvent::Paint )
+    {
+        if ( m_bgTile.isNull() || m_mainWidget->width() > m_bgTile.width() || m_mainWidget->height() > m_bgTile.height() )
+            m_bgTile = TomahawkUtils::createTiledBackground( RESPATH "images/artistpage-background-tile.png", m_mainWidget->width() * 1.1, m_mainWidget->height() * 1.1 );
+
+        if ( m_bgTile.isNull() )
+            return false;
+
+        QPainter p( m_mainWidget );
+
+        // Truncate bg pixmap and paint into bg
+        p.drawPixmap( m_mainWidget->rect(), m_bgTile, m_mainWidget->rect() );
+    }
+
+    return false;
 }

@@ -441,4 +441,46 @@ prepareStyleOption( QStyleOptionViewItemV4* option, const QModelIndex& index, Pl
     }
 }
 
+
+QPixmap
+createTiledBackground( const QString &pixmapPath, int w, int height )
+{
+    QImage tile = QImage( pixmapPath );
+
+    if ( tile.isNull() )
+        return QPixmap();
+
+    if ( tile.height() < height )
+    {
+        // image must be at least as tall as we are
+        QImage taller( tile.width(), height, QImage::Format_ARGB32_Premultiplied );
+        QPainter p( &taller );
+        int curY = 0;
+        while ( curY < taller.height() )
+        {
+            const int thisHeight = (curY + tile.height() > height) ? height - curY : tile.height();
+            p.drawImage( QRect( 0, curY, tile.width(), thisHeight ), tile, QRect( 0, 0, tile.width(), thisHeight ) );
+            curY += tile.height();
+        }
+        tile = taller;
+    }
+
+    QPixmap pm( w, height );
+    pm.fill( Qt::transparent );
+
+    int curWidth = 0;
+    QPainter p( &pm );
+    while ( curWidth < w )
+    {
+        const int thisWidth = (curWidth + tile.width() > w) ? w - curWidth : tile.width();
+
+        const QRect source( 0, 0, thisWidth, pm.height() );
+        const QRect dest( curWidth, 0, thisWidth, pm.height() );
+        p.drawImage( dest, tile, source );
+        curWidth += thisWidth;
+    }
+
+    return pm;
+}
+
 } // ns

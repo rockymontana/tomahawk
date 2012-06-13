@@ -144,5 +144,6 @@
         <file>data/misc/tomahawk_pubkey.pem</file>
         <file>data/images/track-icon-sidebar.png</file>
         <file>data/images/jump-link.png</file>
+	<file>data/images/artistpage-background-tile.png</file>
     </qresource>
 </RCC>
