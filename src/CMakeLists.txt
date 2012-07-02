@@ -149,7 +149,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Config.h.in
 
 # translations
 include( ${CMAKE_SOURCE_DIR}/lang/translations.cmake )
-add_tomahawk_translations(ar bg ca de en es fr ja pl pt_BR ru sv tr zh_CN zh_TW)
+if(NOT $ENV{LINGUAS})
+    add_tomahawk_translations(ar bg ca de en es fr ja pl pt_BR ru sv tr zh_CN zh_TW)
+else()
+    add_tomahawk_translations($ENV{LINGUAS})
+endif()
+
 
 SET( final_src ${final_src} ${tomahawkMoc} ${tomahawkSources} ${trans_outfile})
 
