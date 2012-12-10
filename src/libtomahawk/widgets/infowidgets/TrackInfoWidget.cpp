@@ -44,7 +44,7 @@ TrackInfoWidget::TrackInfoWidget( const Tomahawk::query_ptr& query, QWidget* par
     ui->setupUi( widget );
 
     QPalette pal = palette();
-    pal.setColor( QPalette::Window, QColor( "#454e59" ) );
+    pal.setColor( QPalette::Window, QColor( "#323435" ) );
 
     widget->setPalette( pal );
     widget->setAutoFillBackground( true );
@@ -64,7 +64,7 @@ TrackInfoWidget::TrackInfoWidget( const Tomahawk::query_ptr& query, QWidget* par
 
     QFont f = font();
     f.setBold( true );
-    f.setPointSize( TomahawkUtils::defaultFontSize() + 7 );
+    f.setPointSize( TomahawkUtils::defaultFontSize() + 15 );
     ui->trackLabel->setFont( f );
 //    ui->similarTracksLabel->setFont( f );
 
@@ -79,7 +79,7 @@ TrackInfoWidget::TrackInfoWidget( const Tomahawk::query_ptr& query, QWidget* par
 
     QPalette p = ui->trackLabel->palette();
     p.setColor( QPalette::Foreground, Qt::white );
-    p.setColor( QPalette::Text, Qt::white );
+    p.setColor( QPalette::Text, Qt::gray );
 
     ui->trackLabel->setPalette( p );
     ui->artistLabel->setPalette( p );
@@ -195,7 +195,7 @@ TrackInfoWidget::load( const query_ptr& query )
 
     m_artist->loadStats();
     m_query->loadStats();
-//    m_query->lyrics();
+    m_query->lyrics();
     onCoverUpdated();
 
     ui->trackLabel->setText( query->track() );

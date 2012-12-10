@@ -31,22 +31,25 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
+        <widget class="QLabel" name="artistLabel">
+         <property name="text">
+          <string>Artist</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_8"/>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_10">
          <property name="spacing">
           <number>16</number>
          </property>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_7">
-           <item>
-            <widget class="QLabel" name="artistLabel">
-             <property name="text">
-              <string>Artist</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
            <item>
             <spacer name="verticalSpacer_8">
              <property name="orientation">
@@ -357,9 +360,6 @@
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="margin">
-        <number>0</number>
-       </property>
        <item>
         <widget class="PlayableCover" name="cover_2">
          <property name="sizePolicy">
