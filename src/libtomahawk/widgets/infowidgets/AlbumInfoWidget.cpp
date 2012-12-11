@@ -85,7 +85,7 @@ AlbumInfoWidget::AlbumInfoWidget( const Tomahawk::album_ptr& album, QWidget* par
 
     QFont f = font();
     f.setBold( true );
-    f.setPointSize( TomahawkUtils::defaultFontSize() + 7 );
+    f.setPointSize( TomahawkUtils::defaultFontSize() + 15 );
     ui->albumLabel->setFont( f );
 //    ui->similarTracksLabel->setFont( f );
 
