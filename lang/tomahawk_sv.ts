@@ -3670,7 +3670,7 @@ anger du PIN-koden här:</translation>
     <message>
         <location filename="../src/libtomahawk/playlist/TrackView.cpp" line="574"/>
         <source>Sorry, your filter &apos;%1&apos; did not match any results.</source>
-        <translation>Entschuldige, dein Filter &apos;%1&apos; erzeugte keine Ergebnisse.</translation>
+        <translation>Tyvärr, ditt filter &apos;%1&apos; gav inga träffar</translation>
     </message>
 </context>
 <context>
@@ -3709,7 +3709,7 @@ anger du PIN-koden här:</translation>
     <message>
         <location filename="../src/libtomahawk/playlist/TreeView.cpp" line="296"/>
         <source>Sorry, your filter &apos;%1&apos; did not match any results.</source>
-        <translation>Tyvärr! Dina filter &apos;%1&apos; matchade inga resultat</translation>
+        <translation>Tyvärr! Ditt filter &apos;%1&apos; gav inga träffar</translation>
     </message>
 </context>
 <context>
@@ -3722,7 +3722,7 @@ anger du PIN-koden här:</translation>
     <message>
         <location filename="../src/accounts/twitter/TwitterConfigWidget.ui" line="119"/>
         <source>The Twitter plugin allows you to discover and play music from your Twitter friends running Tomahawk and post messages to your account.</source>
-        <translation>Twitter-pluginnet låter dig utforska och spela musik från dina Twitter-vänner som använder Tomahawk, samt posta meddelanden till ditt konto</translation>
+        <translation>Twitter-pluginnet låter dig utforska och spela musik från dina Twitter-vänner som använder Tomahawk, samt posta tweets till ditt konto</translation>
     </message>
     <message>
         <location filename="../src/accounts/twitter/TwitterConfigWidget.ui" line="137"/>
@@ -3748,7 +3748,7 @@ If you want to connect Tomahawk to your friends using Twitter, select the type o
 
 You can re-send a sync message at any time simply by sending another tweet using the button.</source>
         <translation>
-Om du bara vill posta ett tweet så är du färdig.
+Vill posta ett tweet, är du färdig.
 
 Om du vill ansluta Tomahawk till dina vänner med Twitter så välj vilken typ av tweet och tryck på knappen nedan för att skicka ett synkat meddelande. Båda måste följa varandra då direktmeddelanden används. Var sedan (väldigt) tålmodig då det kan ta flera minuter!
 
@@ -3831,12 +3831,12 @@ Du kan skicka om ett synkat meddelande när som helst genom att skicka ett tweet
     <message>
         <location filename="../src/libtomahawk/widgets/WelcomeWidget.ui" line="34"/>
         <source>Recent Additions</source>
-        <translation>Senaste tillägg</translation>
+        <translation>Senast tillagda</translation>
     </message>
     <message>
         <location filename="../src/libtomahawk/widgets/WelcomeWidget.ui" line="55"/>
         <source>Newest Stations &amp; Playlists</source>
-        <translation>Nyaste stationer och spellistor</translation>
+        <translation>Nyaste stationer &amp; spellistor</translation>
     </message>
     <message>
         <location filename="../src/libtomahawk/widgets/WelcomeWidget.ui" line="70"/>
@@ -3846,7 +3846,7 @@ Du kan skicka om ett synkat meddelande när som helst genom att skicka ett tweet
     <message>
         <location filename="../src/libtomahawk/widgets/WelcomeWidget.cpp" line="85"/>
         <source>Recently played tracks</source>
-        <translation>Senast uppspelade spår</translation>
+        <translation>Nyligen spelade spår</translation>
     </message>
     <message>
         <location filename="../src/libtomahawk/widgets/WelcomeWidget.cpp" line="174"/>
